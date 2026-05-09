@@ -25,26 +25,7 @@ const LoginForm = ({ redirectPath }: LoginFormProps) => {
 	const { mutateAsync, isPending } = useMutation({
 		mutationFn: (payload: ILoginPayload) => loginAction(payload, redirectPath),
 	});
-	const handleGoogleLogin = () => {
-		const form = document.createElement("form");
-		form.method = "POST";
-		form.action = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/sign-in/social`;
 
-		const provider = document.createElement("input");
-		provider.type = "hidden";
-		provider.name = "provider";
-		provider.value = "google";
-
-		const callbackURL = document.createElement("input");
-		callbackURL.type = "hidden";
-		callbackURL.name = "callbackURL";
-		callbackURL.value = "https://cinetube.arifuddincoder.site/dashboard";
-
-		form.appendChild(provider);
-		form.appendChild(callbackURL);
-		document.body.appendChild(form);
-		form.submit();
-	};
 	const form = useForm({
 		defaultValues: { email: "", password: "" },
 		onSubmit: async ({ value }) => {
@@ -61,6 +42,10 @@ const LoginForm = ({ redirectPath }: LoginFormProps) => {
 			}
 		},
 	});
+
+	const handleGoogleLogin = () => {
+		window.location.href = `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/google?redirect=/dashboard`;
+	};
 
 	return (
 		<div className="min-h-screen grid grid-cols-1 lg:grid-cols-2">
