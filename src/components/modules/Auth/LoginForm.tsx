@@ -165,7 +165,7 @@ const LoginForm = ({ redirectPath }: LoginFormProps) => {
 						variant="outline"
 						className="w-full"
 						onClick={() => {
-							window.location.href = `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/google?redirect=/dashboard`;
+							window.location.href = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/google?redirect=/dashboard`;
 						}}
 					>
 						<svg className="size-4 mr-2" viewBox="0 0 24 24">
