@@ -47,7 +47,7 @@ const LoginForm = ({ redirectPath }: LoginFormProps) => {
 	const handleGoogleLogin = async () => {
 		await authClient.signIn.social({
 			provider: "google",
-			callbackURL: "/api/v1/auth/google/success",
+			callbackURL: "/dashboard",
 		});
 	};
 
