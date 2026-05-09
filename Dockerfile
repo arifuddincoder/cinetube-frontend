@@ -17,6 +17,8 @@ COPY . .
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV NEXT_PUBLIC_API_BASE_URL=https://cinetube.arifuddincoder.site/api/v1
+ENV NEXT_PUBLIC_BACKEND_URL=https://cinetube.arifuddincoder.site
 
 RUN bun --bun next build
 
