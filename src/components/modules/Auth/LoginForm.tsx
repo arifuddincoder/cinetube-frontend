@@ -25,7 +25,21 @@ const LoginForm = ({ redirectPath }: LoginFormProps) => {
 	const { mutateAsync, isPending } = useMutation({
 		mutationFn: (payload: ILoginPayload) => loginAction(payload, redirectPath),
 	});
-
+	const handleGoogleLogin = async () => {
+		const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/sign-in/social`, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			credentials: "include",
+			body: JSON.stringify({
+				provider: "google",
+				callbackURL: "https://cinetube.arifuddincoder.site/dashboard",
+			}),
+		});
+		const data = await res.json();
+		if (data.url) {
+			window.location.href = data.url;
+		}
+	};
 	const form = useForm({
 		defaultValues: { email: "", password: "" },
 		onSubmit: async ({ value }) => {
@@ -161,13 +175,7 @@ const LoginForm = ({ redirectPath }: LoginFormProps) => {
 						<div className="flex-1 h-px bg-border" />
 					</div>
 
-					<Button
-						variant="outline"
-						className="w-full"
-						onClick={() => {
-							window.location.href = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/sign-in/social?provider=google&callbackURL=/dashboard`;
-						}}
-					>
+					<Button variant="outline" className="w-full" onClick={() => handleGoogleLogin()}>
 						<svg className="size-4 mr-2" viewBox="0 0 24 24">
 							<path
 								fill="#4285F4"
