@@ -7,6 +7,7 @@ import AppSubmitButton from "@/components/shared/form/AppSubmitButton";
 import Logo from "@/components/shared/Logo/Logo";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
+import { authClient } from "@/lib/auth-client";
 import { IRegisterPayload, registerZodSchema } from "@/zod/auth.validation";
 import { useForm } from "@tanstack/react-form";
 import { useMutation } from "@tanstack/react-query";
@@ -37,7 +38,12 @@ const RegisterForm = () => {
 			}
 		},
 	});
-
+	const handleGoogleLogin = async () => {
+		await authClient.signIn.social({
+			provider: "google",
+			callbackURL: `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/google/success`,
+		});
+	};
 	return (
 		<div className="min-h-screen grid grid-cols-1 lg:grid-cols-2">
 			<div className="hidden lg:flex flex-col justify-between bg-[#0f0f0f] p-12">
@@ -153,13 +159,7 @@ const RegisterForm = () => {
 						<div className="flex-1 h-px bg-border" />
 					</div>
 
-					<Button
-						variant="outline"
-						className="w-full"
-						onClick={() => {
-							window.location.href = `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/google?redirect=/dashboard`;
-						}}
-					>
+					<Button variant="outline" className="w-full" onClick={() => handleGoogleLogin()}>
 						<svg className="size-4 mr-2" viewBox="0 0 24 24">
 							<path
 								fill="#4285F4"
