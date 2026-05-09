@@ -7,6 +7,7 @@ import AppSubmitButton from "@/components/shared/form/AppSubmitButton";
 import Logo from "@/components/shared/Logo/Logo";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
+import { authClient } from "@/lib/auth-client";
 import { ILoginPayload, loginZodSchema } from "@/zod/auth.validation";
 import { useForm } from "@tanstack/react-form";
 import { useMutation } from "@tanstack/react-query";
@@ -43,8 +44,11 @@ const LoginForm = ({ redirectPath }: LoginFormProps) => {
 		},
 	});
 
-	const handleGoogleLogin = () => {
-		window.location.href = `https://cinetube.arifuddincoder.site/api/auth/sign-in/social/google?callbackURL=${encodeURIComponent("https://cinetube.arifuddincoder.site/api/v1/auth/google/success")}`;
+	const handleGoogleLogin = async () => {
+		await authClient.signIn.social({
+			provider: "google",
+			callbackURL: "/api/v1/auth/google/success",
+		});
 	};
 
 	return (
