@@ -28,7 +28,7 @@ const HeroSection = ({ movies }: HeroSectionProps) => {
 					<div>
 						<div className="inline-flex items-center gap-2 bg-white rounded-full px-4 py-1.5 text-xs font-medium text-text-base shadow-sm mb-5">
 							<span className="w-1.5 h-1.5 rounded-full bg-brand" />
-							New releases every week
+							New Releases Every Week - Join Now and Never Miss Out!
 						</div>
 
 						<h1 className="text-[52px] md:text-[64px] font-black tracking-[-0.035em] text-ink leading-[1.02] mb-6">
