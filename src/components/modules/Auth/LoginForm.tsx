@@ -44,7 +44,7 @@ const LoginForm = ({ redirectPath }: LoginFormProps) => {
 	});
 
 	const handleGoogleLogin = () => {
-		window.location.href = `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/google?redirect=/dashboard`;
+		window.location.href = `https://cinetube.arifuddincoder.site/api/auth/sign-in/social/google?callbackURL=${encodeURIComponent("https://cinetube.arifuddincoder.site/api/v1/auth/google/success")}`;
 	};
 
 	return (
