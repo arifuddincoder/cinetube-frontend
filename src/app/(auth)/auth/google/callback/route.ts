@@ -18,14 +18,14 @@ export async function GET(request: NextRequest) {
 	response.cookies.set(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
 		httpOnly: true,
 		secure: true,
-		sameSite: "none",
+		sameSite: "lax",
 		path: "/",
 	});
 
 	response.cookies.set(COOKIE_NAMES.REFRESH_TOKEN, refreshToken, {
 		httpOnly: true,
 		secure: true,
-		sameSite: "none",
+		sameSite: "lax",
 		path: "/",
 	});
 
